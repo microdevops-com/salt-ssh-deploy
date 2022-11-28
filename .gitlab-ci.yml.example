@@ -1,0 +1,33 @@
+stages:
+  - deploy
+
+.salt-ssh-deploy:
+  stage: deploy
+  script:
+    - sudo /opt/salt-ssh-deploy/src/nodegroup_app_mini_only.sh ${SALT_SSH_NODEGROUP} ${DEPLOY_ONLY}
+
+dev.example.com:
+  extends: .salt-ssh-deploy
+  environment:
+    name: dev.example.com
+    url: http://dev.example.com
+  variables:
+    SALT_SSH_NODEGROUP: dev
+    DEPLOY_ONLY: dev
+  tags:
+    - salt-ssh-deploy-dev
+  rules:
+    - if: $CI_COMMIT_BRANCH == "dev"
+
+prod.example.com:
+  extends: .salt-ssh-deploy
+  environment:
+    name: prod.example.com
+    url: http://prod.example.com
+  variables:
+    SALT_SSH_NODEGROUP: prod
+    DEPLOY_ONLY: prod
+  tags:
+    - salt-ssh-deploy-prod
+  rules:
+    - if: $CI_COMMIT_BRANCH == "main"
