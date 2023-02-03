@@ -20,7 +20,7 @@ app:
               -----END OPENSSH PRIVATE KEY-----
             pub: ssh-ed25519 AAAAxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx salt-ssh-deploy@example.com
         source:
-          git: https://github.com/sysadmws/salt-ssh-deploy.git
+          git: https://github.com/microdevops-com/salt-ssh-deploy.git
           target: /opt/__APP_NAME__/src
         files_contents:
           - path: /opt/__APP_NAME__/.env
