@@ -1,0 +1,12 @@
+name: salt-ssh-deploy-master
+on:
+  push: 
+    branches:
+      - master
+
+jobs: 
+  build: 
+    runs-on: salt-ssh-deploy
+    steps: 
+      - uses: actions/checkout@v2 
+      - run: sudo /opt/salt-ssh-deploy/src/nodegroup_app_mini_only.sh node_group_name app_name
